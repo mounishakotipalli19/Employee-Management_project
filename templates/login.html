@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>login</h2>
+    <form id="loginform" action="/login" method="post">
+       <label>username</label><br>
+       <input id="username" name="username" type="text" required>
+       <br><br>
+       <lable>password</lable><br>
+       <input id="password" name="password" type="password" required>
+       <br><br>
+       <input type="submit" value="login">
+    </form>
+    <script>
+        function resetform(){
+            document.getElementById("registerdemo").reset()
+        }
+    </script>
+</body>
+</html>
