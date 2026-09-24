@@ -1,156 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>employee management</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Management System</title>
+
     <style>
-        *{
+
+        /* =========================
+           DEFAULT
+        ========================= */
+
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        body{
-            font-family:arial,sans-serif;
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+
+            transition:
+                background-color 0.3s ease,
+                color 0.3s ease;
         }
-        /*navbar*/
-        .navbar{
-            background-color: rgb(250, 215, 224);
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-        }
-        /*navigation*/
-        .nav-links{
-            display: flex;
-            align-items: center;
-            list-style: none;
-            gap: 20px;
-        }
-        .nav-links a:hover{
-            color: aqua;
-        }
-        /*login.btn*/
-        .login-btn{
-            border: 1px solid #00bcd4;
-            padding: 8px 15px;
-            border-radius:5px;
-        }
-        .login-btn:hover{
-            background-color: #00bcd4;
-            color:white !important;
-         }
-        /*register button*/
-        .register-btn{
-            background-color: #00bcd4;
-            padding:8px 15px;
-            border-radius: 5px;
-        } 
-        .register-button:hover{
-            background-color: #0097a7;
-            color:white !important;
-        }
-        /*content*/
-        .content{
-            padding:50px;
-            text-align: center;
-        }
-        .theme-buttons{
-            display: flex;
-            gap: 10px;
-            margin-right: 20px;
-        }
-        /*------theme buttons-----*/
-        .theme-buttons a{
-            color: white;
-            text-decoration: none;
-            border: 1px solid #00bcd4;
-            padding: 8px 12px;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-        .theme-buttons a:hover{
-            background-color: #00bcd4;
-        }
-        /*---light mode------*/
-        body.light{
+
+
+        /* =========================
+           LIGHT MODE
+        ========================= */
+
+        body.light {
             background-color: #f5f5f5;
             color: #222;
         }
-        body.light.content{
+
+        body.light .content {
             background-color: white;
             color: #222;
         }
-        body.light.content h1{
-            color:#222;
-        }
-        body.light.content p{
-            color: #555;
-        }
-        /*----dark mode----*/
-        body.dark{
-            background-color: #f5f5f5;
-            color:#222;
-        }
-        body.dark.content{
-            background-color: #f5f5f5;
+
+        body.light .content h1 {
             color: #222;
         }
-        body.dark.content h1{
+
+        body.light .content p {
+            color: #555;
+        }
+
+
+        /* =========================
+           DARK MODE
+        ========================= */
+
+        body.dark {
+            background-color: #121212;
+            color: white;
+        }
+
+        body.dark .content {
             background-color: #1e1e1e;
-            color:#222;
+            color: white;
         }
-        body.dark.content p{
-            content:#555;
+
+        body.dark .content h1 {
+            color: white;
         }
+
+        body.dark .content p {
+            color: #ddd;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            background-color: #222;
+
+            padding: 15px 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            min-height: 70px;
+        }
+
+
+        /* =========================
+           LOGO
+        ========================= */
+
+        .logo {
+            color: white;
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            margin-right: auto;
+        }
+
+
+        /* =========================
+           THEME BUTTONS
+        ========================= */
+
+        .theme-buttons {
+            display: flex;
+
+            gap: 10px;
+
+            margin-right: 30px;
+        }
+
+        .theme-buttons a {
+            color: white;
+
+            text-decoration: none;
+
+            border: 1px solid #00bcd4;
+
+            padding: 8px 12px;
+
+            border-radius: 5px;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+        .theme-buttons a:hover {
+            background-color: #00bcd4;
+        }
+
+
+        /* =========================
+           NAV LINKS
+        ========================= */
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            list-style: none;
+
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 16px;
+
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00bcd4;
+        }
+
+
+        /* =========================
+           LOGOUT BUTTON
+        ========================= */
+
+        .logout-button {
+            background-color: #e53935;
+
+            color: white !important;
+
+            padding: 8px 14px;
+
+            border-radius: 5px;
+
+            text-decoration: none;
+
+            font-size: 14px !important;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .logout-button:hover {
+            background-color: #c62828;
+
+            color: white !important;
+        }
+
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .content {
+            width: 80%;
+
+            margin: 60px auto;
+
+            padding: 60px 30px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            transition: 0.3s;
+        }
+
+
+        .content h1 {
+            margin-bottom: 20px;
+        }
+
+
+        .content p {
+            font-size: 18px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .navbar {
+                flex-wrap: wrap;
+
+                gap: 15px;
+
+                padding: 15px;
+            }
+
+            .logo {
+                width: 100%;
+
+                margin-right: 0;
+
+                text-align: center;
+            }
+
+            .theme-buttons {
+                margin-right: 0;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+                width: 100%;
+
+                gap: 15px;
+            }
+
+        }
+
     </style>
+
 </head>
-<body>
+
+
+<!-- Flask sends theme = light/dark -->
+
+<body class="{{ theme }}">
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
     <nav class="navbar">
+
+
+        <!-- LOGO -->
+
         <div class="logo">
-            employee management system
+            Employee Management System
         </div>
+
+
+        <!-- THEME BUTTONS -->
+
         <div class="theme-buttons">
-            <a href="/set-theme/light">light </a>
-            <a href="/set-theme/dark">dark</a>
+
+            <a href="/set-theme/light">
+                ☀ Light
+            </a>
+
+            <a href="/set-theme/dark">
+                🌙 Dark
+            </a>
+
         </div>
+
+
+        <!-- NAVIGATION -->
+
         <ul class="nav-links">
-         <li>
-            <a href="/home">
-              home
-            </a>
-         </li>
-          <li>
-            <a href="/employees">
-              employee
-            </a>
-        </li>
-         <li>
-            <a href="/addemployee">
-              addemployee
-            </a>
-         </li>
-          <li>
-            <a href="/search">
-              search
-            </a>
-         </li>
-          <li>
-            <a href="/registerdemo">
-              <button class="register-btn" type="submit">register</button>
-            </a>
-         </li>
-         <li>
-            <a href="/login">
-              <button class="login-btn" type="submit">login</button>
-            </a>
-         </li>
+
+            <li>
+                <a href="/">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="/employees">
+                    Employees
+                </a>
+            </li>
+
+            <li>
+                <a href="/add-employee">
+                    Add Employee
+                </a>
+            </li>
+
+            <li>
+                <a href="/search">
+                    Search
+                </a>
+            </li>
+
+            <!-- LOGOUT -->
+
+            <li>
+                <a href="/logout"
+                   class="logout-button">
+                    Logout
+                </a>
+            </li>
 
         </ul>
+
     </nav>
+
+
+    <!-- =========================
+         CONTENT
+    ========================= -->
+
     <div class="content">
-        <h1> welcome to employee management system</h1>
-        <p>manage your employee easely</p>
+
+        {% if fullname %}
+
+            <h1>
+                Welcome, {{ fullname }}!
+            </h1>
+
+        {% else %}
+
+            <h1>
+                Welcome to Employee Management System
+            </h1>
+
+        {% endif %}
+
+
+        <p>
+            Manage your employees easily.
+        </p>
+
     </div>
+
+
 </body>
+
 </html>
