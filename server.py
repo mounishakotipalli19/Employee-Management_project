@@ -1,4 +1,4 @@
-rom flask import Flask, request, redirect, render_template, make_response, session
+from flask import Flask, request, redirect, render_template, make_response, session
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -60,7 +60,7 @@ def create_database():
             phone TEXT NOT NULL,
             department TEXT NOT NULL,
             salary INTEGER NOT NULL,
-            joining_date TEXT NOT NULL,
+            joining TEXT NOT NULL,
             address TEXT
         )
     """)
@@ -150,7 +150,7 @@ def register_page():
     )
 
     return render_template(
-        "register2.html",
+        "registerdemo.html",
         theme=theme
     )
 
@@ -184,7 +184,7 @@ def register():
     if not fullname:
 
         return render_template(
-            "register2.html",
+            "registerdemo.html",
             theme=request.cookies.get(
                 "theme",
                 "light"
@@ -195,7 +195,7 @@ def register():
     if not username:
 
         return render_template(
-            "register2.html",
+            "registerdemo.html",
             theme=request.cookies.get(
                 "theme",
                 "light"
@@ -206,7 +206,7 @@ def register():
     if not password:
 
         return render_template(
-            "register2.html",
+            "registerdemo.html",
             theme=request.cookies.get(
                 "theme",
                 "light"
@@ -254,7 +254,7 @@ def register():
         connection.close()
 
         return render_template(
-            "register2.html",
+            "registerdemo.html",
             theme=request.cookies.get(
                 "theme",
                 "light"
@@ -416,7 +416,7 @@ def logout():
 # 8. ADD EMPLOYEE PAGE - GET
 # =========================================
 
-@app.route("/add-employee", methods=["GET"])
+@app.route("/addemployee", methods=["GET"])
 def add_employee_page():
 
     if not login_required():
@@ -429,7 +429,7 @@ def add_employee_page():
     )
 
     return render_template(
-        "add-employee.html",
+        "addemployee.html",
         theme=theme
     )
 
@@ -438,7 +438,7 @@ def add_employee_page():
 # 9. ADD EMPLOYEE - POST
 # =========================================
 
-@app.route("/add-employee", methods=["POST"])
+@app.route("/addemployee", methods=["POST"])
 def add_employee():
 
     if not login_required():
@@ -470,8 +470,8 @@ def add_employee():
         ""
     ).strip()
 
-    joining_date = request.form.get(
-        "joining_date",
+    joining = request.form.get(
+        "joining",
         ""
     ).strip()
 
@@ -504,9 +504,9 @@ def add_employee():
 
         return "Salary is required!"
 
-    if not joining_date:
+    if not joining:
 
-        return "Joining date is required!"
+        return "Joining  is required!"
 
     try:
 
@@ -532,7 +532,7 @@ def add_employee():
             phone,
             department,
             salary,
-            joining_date,
+            joining,
             address
         )
         VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -543,7 +543,7 @@ def add_employee():
         phone,
         department,
         salary,
-        joining_date,
+        joining,
         address
     ))
 
@@ -776,8 +776,8 @@ def edit_employee(id):
         ""
     ).strip()
 
-    joining_date = request.form.get(
-        "joining_date",
+    joining = request.form.get(
+        "joining",
         ""
     ).strip()
 
@@ -810,9 +810,9 @@ def edit_employee(id):
 
         return "Salary is required!"
 
-    if not joining_date:
+    if not joining:
 
-        return "Joining date is required!"
+        return "Joining  is required!"
 
     try:
 
@@ -838,7 +838,7 @@ def edit_employee(id):
             phone = ?,
             department = ?,
             salary = ?,
-            joining_date = ?,
+            joining= ?,
             address = ?
         WHERE id = ?
     """,
@@ -848,7 +848,7 @@ def edit_employee(id):
         phone,
         department,
         salary,
-        joining_date,
+        joining,
         address,
         id
     ))
