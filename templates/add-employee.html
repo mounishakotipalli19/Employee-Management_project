@@ -8,9 +8,13 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Employee Management System</title>
+    <title>Add Employee</title>
 
     <style>
+
+        /* =========================
+           RESET
+        ========================= */
 
         * {
             margin: 0;
@@ -18,40 +22,48 @@
             box-sizing: border-box;
         }
 
+
+        /* =========================
+           BODY
+        ========================= */
+
         body {
             font-family: Arial, sans-serif;
-            min-height: 100vh;
             transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
         }
 
 
-        /* ================= LIGHT THEME ================= */
+        /* =========================
+           LIGHT MODE
+        ========================= */
 
         body.light {
             background-color: #f5f5f5;
             color: #222;
         }
 
-        body.light .table-container {
+        body.light .container {
             background-color: white;
             color: #222;
         }
 
-        body.light td {
+        body.light h1 {
             color: #222;
-            border-bottom: 1px solid #ddd;
         }
 
-        body.light tbody tr:hover {
-            background-color: #f5f5f5;
+        body.light input,
+        body.light select,
+        body.light textarea {
+            background-color: white;
+            color: #222;
+            border: 1px solid #ccc;
         }
 
-        body.light .no-employees {
-            color: #777;
-        }
 
-
-        /* ================= DARK THEME ================= */
+        /* =========================
+           DARK MODE
+        ========================= */
 
         body.dark {
             background-color: #121212;
@@ -59,49 +71,62 @@
         }
 
         body.dark .container {
-            color: white;
-        }
-
-        body.dark .table-container {
             background-color: #1e1e1e;
             color: white;
-            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.08);
+
+            box-shadow:
+                0 2px 10px rgba(255, 255, 255, 0.08);
         }
 
-        body.dark td {
+        body.dark h1 {
             color: white;
-            border-bottom: 1px solid #444;
         }
 
-        body.dark tbody tr:hover {
+        body.dark label {
+            color: white;
+        }
+
+        body.dark input,
+        body.dark select,
+        body.dark textarea {
             background-color: #2b2b2b;
+            color: white;
+            border: 1px solid #555;
         }
 
-        body.dark .no-employees {
+        body.dark input::placeholder,
+        body.dark textarea::placeholder {
             color: #aaa;
         }
 
+        body.dark option {
+            background-color: #2b2b2b;
+            color: white;
+        }
 
-        /* ================= NAVBAR ================= */
+
+        /* =========================
+           NAVBAR
+        ========================= */
 
         .navbar {
             background-color: #222;
 
-            min-height: 70px;
-
-            padding: 0 35px;
+            padding: 15px 30px;
 
             display: flex;
 
             align-items: center;
 
-            justify-content: space-between;
+            flex-wrap: wrap;
 
-            gap: 20px;
+            gap: 15px;
         }
 
 
-        /* ================= LOGO ================= */
+        /* =========================
+           LOGO
+        ========================= */
 
         .logo {
             color: white;
@@ -110,11 +135,13 @@
 
             font-weight: bold;
 
-            white-space: nowrap;
+            margin-right: auto;
         }
 
 
-        /* ================= THEME BUTTONS ================= */
+        /* =========================
+           THEME BUTTONS
+        ========================= */
 
         .theme-buttons {
             display: flex;
@@ -122,6 +149,8 @@
             align-items: center;
 
             gap: 10px;
+
+            margin-right: 5px;
         }
 
         .theme-buttons a {
@@ -147,16 +176,20 @@
         }
 
 
-        /* ================= NAV LINKS ================= */
+        /* =========================
+           NAVIGATION
+        ========================= */
 
         .nav-links {
             display: flex;
 
             align-items: center;
 
-            gap: 15px;
-
             list-style: none;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
         }
 
         .nav-links a {
@@ -166,10 +199,6 @@
 
             font-size: 16px;
 
-            padding: 10px 12px;
-
-            border-radius: 5px;
-
             transition: 0.3s;
         }
 
@@ -178,50 +207,119 @@
         }
 
 
-        /* ================= MAIN CONTAINER ================= */
+        /* =========================
+           FORM CONTAINER
+        ========================= */
 
         .container {
-            width: 92%;
+            width: 600px;
 
-            max-width: 1400px;
+            max-width: 90%;
 
             margin: 40px auto;
+
+            padding: 30px;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 2px 10px rgba(0, 0, 0, 0.1);
+
+            transition:
+                background-color 0.3s,
+                color 0.3s;
         }
 
 
-        /* ================= HEADING ================= */
+        /* =========================
+           HEADING
+        ========================= */
 
         h1 {
             text-align: center;
 
-            margin-bottom: 30px;
-
-            font-size: 32px;
+            margin-bottom: 25px;
         }
 
 
-        /* ================= ADD EMPLOYEE ================= */
+        /* =========================
+           LABEL
+        ========================= */
 
-        .add-section {
-            margin-bottom: 20px;
+        label {
+            display: block;
+
+            margin-top: 15px;
+
+            margin-bottom: 5px;
+
+            font-weight: bold;
         }
+
+
+        /* =========================
+           INPUT / SELECT / TEXTAREA
+        ========================= */
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+
+            padding: 10px;
+
+            border-radius: 5px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition:
+                background-color 0.3s,
+                color 0.3s,
+                border-color 0.3s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #00bcd4;
+        }
+
+
+        /* =========================
+           TEXTAREA
+        ========================= */
+
+        textarea {
+            height: 100px;
+
+            resize: vertical;
+        }
+
+
+        /* =========================
+           ADD BUTTON
+        ========================= */
 
         .add-btn {
-            display: inline-block;
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 12px;
+
+            border: none;
 
             background-color: #00bcd4;
 
             color: white;
 
-            text-decoration: none;
-
-            padding: 11px 20px;
+            font-size: 16px;
 
             border-radius: 5px;
 
-            font-size: 16px;
-
-            font-weight: bold;
+            cursor: pointer;
 
             transition: 0.3s;
         }
@@ -231,157 +329,61 @@
         }
 
 
-        /* ================= TABLE CONTAINER ================= */
+        /* =========================
+           RESET BUTTON
+        ========================= */
 
-        .table-container {
-            padding: 20px;
-
-            border-radius: 10px;
-
-            overflow-x: auto;
-
-            transition:
-                background-color 0.3s,
-                color 0.3s;
-        }
-
-
-        /* ================= TABLE ================= */
-
-        table {
+        .reset-btn {
             width: 100%;
 
-            border-collapse: collapse;
+            margin-top: 10px;
 
-            min-width: 1100px;
-        }
+            padding: 12px;
 
-        thead {
-            background-color: #222;
-        }
+            border: none;
 
-        th {
-            color: white;
-
-            padding: 15px;
-
-            text-align: left;
-
-            white-space: nowrap;
-        }
-
-        td {
-            padding: 13px 15px;
-
-            white-space: nowrap;
-
-            transition:
-                background-color 0.3s,
-                color 0.3s;
-        }
-
-
-        /* ================= ACTION BUTTONS ================= */
-
-        .actions {
-            white-space: nowrap;
-        }
-
-        .edit-btn,
-        .delete-btn {
-
-            display: inline-block;
+            background-color: #777;
 
             color: white;
 
-            text-decoration: none;
-
-            padding: 8px 13px;
+            font-size: 16px;
 
             border-radius: 5px;
 
-            font-size: 14px;
-
-            margin-right: 5px;
+            cursor: pointer;
 
             transition: 0.3s;
         }
 
-
-        /* ================= EDIT BUTTON ================= */
-
-        .edit-btn {
-            background-color: #00bcd4;
-        }
-
-        .edit-btn:hover {
-            background-color: #0097a7;
+        .reset-btn:hover {
+            background-color: #555;
         }
 
 
-        /* ================= DELETE BUTTON ================= */
+        /* =========================
+           MOBILE RESPONSIVE
+        ========================= */
 
-        .delete-btn {
-            background-color: #e53935;
-        }
-
-        .delete-btn:hover {
-            background-color: #c62828;
-        }
-
-
-        /* ================= NO EMPLOYEES ================= */
-
-        .no-employees {
-            text-align: center;
-
-            padding: 30px;
-
-            font-size: 18px;
-        }
-
-
-        /* ================= MOBILE ================= */
-
-        @media (max-width: 1100px) {
+        @media (max-width: 900px) {
 
             .navbar {
                 flex-direction: column;
 
-                padding: 20px;
+                justify-content: center;
 
-                gap: 15px;
-            }
-
-            .logo {
                 text-align: center;
             }
 
+            .logo {
+                margin-right: 0;
+            }
+
             .theme-buttons {
-                justify-content: center;
+                margin-right: 0;
             }
 
             .nav-links {
-                flex-wrap: wrap;
-
                 justify-content: center;
-
-                gap: 10px;
-            }
-
-        }
-
-
-        @media (max-width: 900px) {
-
-            .container {
-                width: 95%;
-
-                margin-top: 30px;
-            }
-
-            h1 {
-                font-size: 26px;
             }
 
         }
@@ -389,18 +391,22 @@
 
         @media (max-width: 600px) {
 
-            .logo {
-                font-size: 18px;
+            .container {
+                width: 95%;
+
+                max-width: 95%;
+
+                margin: 25px auto;
+
+                padding: 20px;
             }
 
             .nav-links {
-                gap: 5px;
+                gap: 10px;
             }
 
             .nav-links a {
                 font-size: 14px;
-
-                padding: 8px;
             }
 
             .theme-buttons a {
@@ -409,24 +415,8 @@
                 padding: 7px 10px;
             }
 
-            .container {
-                width: 95%;
-
-                margin: 25px auto;
-            }
-
-            h1 {
-                font-size: 23px;
-            }
-
-            .table-container {
-                padding: 10px;
-            }
-
-            .add-btn {
-                font-size: 14px;
-
-                padding: 10px 15px;
+            .logo {
+                font-size: 18px;
             }
 
         }
@@ -436,89 +426,326 @@
 </head>
 
 
-<body>
+<!-- =========================
+     BODY
+========================= -->
 
-    <div class="container">
-        <h1>Add employee</h1>
-        <form action="/addemployee" method="post">
-          <div class="row">
-             <div class="form-group">
-                <label for="employeename">employee name:</label>
-                <input type="text" id="employeename" name="employeename"
-                placeholder="enter employee name" required>
-                <label for="email">email:</label>
-                <input type="email" id="email" name="email"
-                placeholder="enter email" required>
-             </div>
-          </div>
-          <div class="row">
-             <div class="form-group">
-                <label for="phone">phone:</label>
-                <input type="tel" id="phone" name="phone"
-                placeholder="enter phone number" required>
-                <label for="department">department:</label>
-                <select id="department" name="department" required>
-                    <option value="select department">select department</option>
-                    <option value="IT">IT</option>
-                    <option value="HR">HR</option>
-                    <option value="Finance">Finance</option>
-                    <option value="Marketing">Marketing</option>
-                </select>
-             </div>
-          </div>
-         <div class="row">
-             <div class="form-group">
-                <label for="salary">salary:</label>
-                <input type="number" id="salary" name="salary"
-                placeholder="enter salary" required>
-                <label for="joining">joining:</label>
-                <input type="date" id="joining" name="joining" required>
-             </div>
-          </div>
-        <div class="row">
-             <div class="form-group">
-                <label for="address">address:</label>
-                <textarea  id="address" name="address" required></textarea>
-             </div>
-          </div>
-         <div class="row" >
-              <div class="form-group">
-            <button type="submit" value="add employee">add employee</button>
-            <button type="submit" value="reset">reset</button>
-            </div>
-          </div>
-     </form>     
-    </div>
-    </body>
 <body class="{{ theme }}">
 
-    <!-- ================= NAVBAR ================= -->
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
 
     <nav class="navbar">
 
 
-        <!-- ================= LOGO ================= -->
+        <!-- LOGO -->
 
         <div class="logo">
+
             Employee Management System
+
         </div>
 
 
-        <!-- ================= THEME BUTTONS ================= -->
+        <!-- =========================
+             THEME BUTTONS
+        ========================= -->
 
         <div class="theme-buttons">
 
             <a href="/set-theme/light">
+
                 ☀ Light
+
             </a>
 
+
             <a href="/set-theme/dark">
+
                 🌙 Dark
+
             </a>
 
         </div>
-</nav>
+
+
+        <!-- =========================
+             NAVIGATION
+        ========================= -->
+
+        <ul class="nav-links">
+
+
+            <!-- HOME -->
+
+            <li>
+
+                <a href="/">
+
+                    Home
+
+                </a>
+
+            </li>
+
+
+            <!-- EMPLOYEES -->
+
+            <li>
+
+                <a href="/employees">
+
+                    Employees
+
+                </a>
+
+            </li>
+
+
+            <!-- ADD EMPLOYEE -->
+
+            <li>
+
+                <a href="/add-employee">
+
+                    Add Employee
+
+                </a>
+
+            </li>
+
+
+            <!-- SEARCH -->
+
+            <li>
+
+                <a href="/search">
+
+                    Search
+
+                </a>
+
+            </li>
+
+
+        </ul>
+
+    </nav>
+
+
+    <!-- =========================
+         ADD EMPLOYEE FORM
+    ========================= -->
+
+    <div class="container">
+
+
+        <h1>
+
+            Add Employee
+
+        </h1>
+
+
+        <form action="/add-employee"
+              method="POST">
+
+
+            <!-- =========================
+                 EMPLOYEE NAME
+            ========================= -->
+
+            <label for="name">
+
+                Employee Name
+
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter employee name"
+                required>
+
+
+            <!-- =========================
+                 EMAIL
+            ========================= -->
+
+            <label for="email">
+
+                Email
+
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter email"
+                required>
+
+
+            <!-- =========================
+                 PHONE
+            ========================= -->
+
+            <label for="phone">
+
+                Phone
+
+            </label>
+
+            <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Enter phone number"
+                required>
+
+
+            <!-- =========================
+                 DEPARTMENT
+            ========================= -->
+
+            <label for="department">
+
+                Department
+
+            </label>
+
+            <select
+                id="department"
+                name="department"
+                required>
+
+                <option value="">
+
+                    Select Department
+
+                </option>
+
+                <option value="HR">
+
+                    HR
+
+                </option>
+
+                <option value="IT">
+
+                    IT
+
+                </option>
+
+                <option value="Finance">
+
+                    Finance
+
+                </option>
+
+                <option value="Marketing">
+
+                    Marketing
+
+                </option>
+
+                <option value="Sales">
+
+                    Sales
+
+                </option>
+
+            </select>
+
+
+            <!-- =========================
+                 SALARY
+            ========================= -->
+
+            <label for="salary">
+
+                Salary
+
+            </label>
+
+            <input
+                type="number"
+                id="salary"
+                name="salary"
+                placeholder="Enter salary"
+                min="0"
+                required>
+
+
+            <!-- =========================
+                 JOINING DATE
+            ========================= -->
+
+            <label for="joining_date">
+
+                Joining Date
+
+            </label>
+
+            <input
+                type="date"
+                id="joining_date"
+                name="joining_date"
+                required>
+
+
+            <!-- =========================
+                 ADDRESS
+            ========================= -->
+
+            <label for="address">
+
+                Address
+
+            </label>
+
+            <textarea
+                id="address"
+                name="address"
+                placeholder="Enter employee address"></textarea>
+
+
+            <!-- =========================
+                 ADD EMPLOYEE BUTTON
+            ========================= -->
+
+            <button
+                type="submit"
+                class="add-btn">
+
+                Add Employee
+
+            </button>
+
+
+            <!-- =========================
+                 RESET BUTTON
+            ========================= -->
+
+            <button
+                type="reset"
+                class="reset-btn">
+
+                Reset
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+
 </body>
+
 </html>
 
 
