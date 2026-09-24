@@ -76,7 +76,7 @@ def home():
 def home_page():
     return render_template("home.html")
 #----register page-----
-@app.route("/registerdemo",methods=["get"])
+@app.route("/register",methods=["GET"])
 def register_page():
     theme=request.cookies.get(
         "theme",
@@ -84,8 +84,9 @@ def register_page():
     )
     return render_template("registerdemo.html",theme=theme)
 
-@app.route("/registerdemo",methods=["post"])
+@app.route("/register",methods=["POST"])
 def register():
+    print("register route called")
     fullname=request.form.get("fullname"," ").strip()
     username=request.form.get("username"," ").strip()
     password=request.form.get("password"," ")
@@ -126,14 +127,14 @@ def register():
     connection.close()
     return redirect("/login")
 #----login page----
-@app.route("/login" ,methods=["get"]) 
+@app.route("/login" ,methods=["GET"]) 
 def login_page():
     if "user_id" in session:
         return redirect("/")
     theme=request.cookies.get("theme","light")
     return render_template("login.html",theme=theme)
 
-@app.route("/login",methods=["post"])
+@app.route("/login",methods=["POST"])
 def login():
     username=request.form.get("username"," ").strip()
     password=request.form.get("password"," ")
@@ -166,13 +167,13 @@ def logout():
     session.clear()
     return redirect("/login")
  #----add employee-----
-@app.route("/addemployee",methods=["get"])
+@app.route("/addemployee",methods=["GET"])
 def addemployee_page():
     if not login_required():
         return redirect("/login")
     theme=request.cookies.get("theme","light")
     return render_template("addemployee.html",theme=theme) 
-@app.route("/addemployee",methods=["post"])
+@app.route("/addemployee",methods=["POST"])
 def addemployee():
     if not login_required():
         return redirect("/login")
@@ -237,7 +238,7 @@ def employees():
 
 
 #-----edit employee-----
-@app.route("/edit-employee/<int:id>",methods=["get"])
+@app.route("/edit-employee/<int:id>",methods=["GET"])
 def edit_employee_page(id):
     if not login_required():
         return redirect("/login")
@@ -258,7 +259,7 @@ def edit_employee_page(id):
     theme=request.cookies.get("theme","light")
     return render_template("edit-employee.html",employee=employee,theme=theme)
 #Edit Employee update(post)
-@app.route("/edit-employee/<int:id>",methods=["post"])
+@app.route("/edit-employee/<int:id>",methods=["POST"])
 def edit_employee(id):
     if not login_required():
         return redirect("/login")
