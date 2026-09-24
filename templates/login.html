@@ -16,6 +16,10 @@
        <br><br>
        <input type="submit" value="login">
     </form>
+    <p>
+    Don't have an account?
+    <a href="{{ url_for('register_page') }}">Register here</a>
+</p>
     <script>
         function resetform(){
             document.getElementById("registerdemo").reset()
