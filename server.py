@@ -757,7 +757,7 @@ def edit_employee(id):
         return redirect("/login")
 
     employeename = request.form.get(
-        "employeename",
+        "employeename",""
         
     ).strip()
 
