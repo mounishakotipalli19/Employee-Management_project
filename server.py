@@ -55,12 +55,12 @@ def create_database():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS employees (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
+            employeename TEXT NOT NULL,
             email TEXT NOT NULL,
             phone TEXT NOT NULL,
             department TEXT NOT NULL,
             salary INTEGER NOT NULL,
-            joining_date TEXT NOT NULL,
+            joining TEXT NOT NULL,
             address TEXT
         )
     """)
@@ -450,8 +450,8 @@ def add_employee():
 
         return redirect("/login")
 
-    name = request.form.get(
-        "name",
+    employeename = request.form.get(
+        "employeename",
         ""
     ).strip()
 
@@ -475,8 +475,8 @@ def add_employee():
         ""
     ).strip()
 
-    joining_date = request.form.get(
-        "joining_date",
+    joining = request.form.get(
+        "joining",
         ""
     ).strip()
 
@@ -489,7 +489,7 @@ def add_employee():
     # VALIDATION
     # =====================================
 
-    if not name:
+    if not employeename:
 
         return "Name is required!"
 
@@ -509,7 +509,7 @@ def add_employee():
 
         return "Salary is required!"
 
-    if not joining_date:
+    if not joining:
 
         return "Joining date is required!"
 
@@ -532,23 +532,23 @@ def add_employee():
     cursor.execute("""
         INSERT INTO employees
         (
-            name,
+            employeename,
             email,
             phone,
             department,
             salary,
-            joining_date,
+            joining,
             address
         )
         VALUES (?, ?, ?, ?, ?, ?, ?)
     """,
     (
-        name,
+        employeename,
         email,
         phone,
         department,
         salary,
-        joining_date,
+        joining,
         address
     ))
 
@@ -624,7 +624,7 @@ def search():
             SELECT *
             FROM employees
             WHERE
-                name LIKE ?
+               employeename LIKE ?
                 OR email LIKE ?
                 OR phone LIKE ?
                 OR department LIKE ?
@@ -756,9 +756,9 @@ def edit_employee(id):
 
         return redirect("/login")
 
-    name = request.form.get(
-        "name",
-        ""
+    employeename = request.form.get(
+        "employeename",
+        
     ).strip()
 
     email = request.form.get(
@@ -781,8 +781,8 @@ def edit_employee(id):
         ""
     ).strip()
 
-    joining_date = request.form.get(
-        "joining_date",
+    joining = request.form.get(
+        "joining",
         ""
     ).strip()
 
@@ -795,7 +795,7 @@ def edit_employee(id):
     # VALIDATION
     # =====================================
 
-    if not name:
+    if not employeename:
 
         return "Name is required!"
 
@@ -815,7 +815,7 @@ def edit_employee(id):
 
         return "Salary is required!"
 
-    if not joining_date:
+    if not joining:
 
         return "Joining date is required!"
 
@@ -838,22 +838,22 @@ def edit_employee(id):
     cursor.execute("""
         UPDATE employees
         SET
-            name = ?,
+            employeename = ?,
             email = ?,
             phone = ?,
             department = ?,
             salary = ?,
-            joining_date = ?,
+            joining = ?,
             address = ?
         WHERE id = ?
     """,
     (
-        name,
+        employeename,
         email,
         phone,
         department,
         salary,
-        joining_date,
+        joining,
         address,
         id
     ))
