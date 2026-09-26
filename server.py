@@ -135,7 +135,12 @@ def home():
         username=username,
         fullname=fullname
     )
-
+@app.route("/home",methods=["GET"])
+def home_page():
+    theme=request.cookies.get(
+            "theme","light"
+    )
+    return render_template("home.html",theme=theme)
 
 # =========================================
 # 3. REGISTER PAGE - GET
